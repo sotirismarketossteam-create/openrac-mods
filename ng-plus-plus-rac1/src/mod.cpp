@@ -16,8 +16,7 @@ ProgressionSettings settings;
 
 constexpr std::array<const char*, ngpp::rac1::weapon_count> xp_keys{{
     "xp_bomb_glove", "xp_devastator", "xp_blaster", "xp_pyrocitor",
-    "xp_mine_glove", "xp_walloper", "xp_tesla_claw", "xp_visibomb",
-    "xp_morph_o_ray", "xp_ryno", "xp_suck_cannon", "xp_decoy_glove",
+    "xp_mine_glove", "xp_walloper", "xp_tesla_claw", "xp_glove_of_doom", "xp_morph_o_ray", "xp_ryno", "xp_suck_cannon", "xp_decoy_glove",
     "xp_taunter", "xp_drone_device"
 }};
 
