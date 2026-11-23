@@ -71,6 +71,14 @@
       "section": "Progression"
     },
     {
+      "key": "xp_hud",
+      "name": "Weapon XP HUD",
+      "type": "bool",
+      "default": true,
+      "description": "Show the selected weapon's level and XP bar below its ammo counter.",
+      "section": "HUD"
+    },
+    {
       "key": "damage_scaling",
       "name": "Weapon damage scaling",
       "type": "bool",
