@@ -157,6 +157,16 @@
       "section": "Per-weapon XP"
     },
     {
+      "key": "xp_glove_of_doom",
+      "name": "Glove of Doom XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Glove of Doom to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
       "key": "xp_morph_o_ray",
       "name": "Morph-o-Ray XP per level",
       "type": "int",
