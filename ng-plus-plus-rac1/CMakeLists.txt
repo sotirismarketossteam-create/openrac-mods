@@ -5,6 +5,10 @@ project(ng_plus_plus_rac1 LANGUAGES C CXX)
 # its cmake/ directory). The resulting package contains the native plugin.
 if(NOT OpenRACMod_DIR AND DEFINED OPENRAC_SDK)
     set(OpenRACMod_DIR "${OPENRAC_SDK}/cmake")
+elseif(NOT OpenRACMod_DIR AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/sdk.lock")
+    file(READ "${CMAKE_CURRENT_SOURCE_DIR}/sdk.lock" sdk_lock)
+    string(JSON sdk_version GET "${sdk_lock}" version)
+    set(OpenRACMod_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.sdk/openrac-mod-sdk-${sdk_version}/cmake")
 endif()
 find_package(OpenRACMod 1.16 REQUIRED)
 
