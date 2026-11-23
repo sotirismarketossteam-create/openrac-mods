@@ -14,3 +14,10 @@ openrac_add_mod(ng_plus_plus_rac1
         src/mod.cpp
         src/progression.cpp
 )
+
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(ng_plus_plus_rac1_progression_test tests/progression_test.cpp)
+    target_link_libraries(ng_plus_plus_rac1_progression_test PRIVATE ng_plus_plus_rac1)
+    add_test(NAME rac1_progression COMMAND ng_plus_plus_rac1_progression_test)
+endif()
