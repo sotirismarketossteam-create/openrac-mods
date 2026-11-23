@@ -50,7 +50,11 @@ jobs:
       - name: Package (Linux)
         if: runner.os == 'Linux'
         shell: bash
-        run: python ".sdk/openrac-mod-sdk-1.36.0/tools/package_mod.py" build/package/* -o dist
+        run: |
+          Get-ChildItem build/package -Directory | ForEach-Object {
+            python ".sdk/openrac-mod-sdk-1.36.0/tools/package_mod.py" $_.FullName -o dist
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
       - name: Package (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
