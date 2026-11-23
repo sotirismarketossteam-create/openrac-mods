@@ -42,7 +42,7 @@ The progression slots cover all 15 weapons in the OpenRAC RAC1 catalogue:
 - [ ] Verified RAC1 item-ID mapping.
 - [ ] Reliable weapon-to-kill attribution in RAC1.
 - [ ] Award XP only after a confirmed kill and persist the updated progression.
-- [ ] Damage/ammo effects and level-up notices.
+- [x] Damage scaling hook and level-up notices (in-game verification pending).\n- [ ] Ammo capacity scaling.
 - [ ] Build/package for each platform and in-game testing on NTSC and PAL.
 
 The native plugin currently loads its progression core and keeps save data separate per game save. It does **not** award XP yet: kill credit must first be positively attributed to the weapon that caused the kill. The plugin is therefore an early development build, not a finished playable NG++ experience.
