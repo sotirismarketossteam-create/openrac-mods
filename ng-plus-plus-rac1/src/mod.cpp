@@ -3,6 +3,7 @@
 
 #include "progression.hpp"
 
+#include <algorithm>
 #include <array>
 #include <cstdint>
 #include <string>
