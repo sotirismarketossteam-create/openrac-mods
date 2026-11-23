@@ -13,7 +13,7 @@ This is the separate RAC1 edition. The existing `ng-plus-plus/` directory remain
 ## Implementation status
 
 - [x] RAC1-only manifest and launcher settings.
-- [x] Independent per-weapon progression state (14 weapon slots, levels 1–10).
+- [x] Independent per-weapon progression state (15 weapon slots, levels 1–10).
 - [x] Versioned save-payload serialization for OpenRAC's per-save mod data API.
 - [x] Native C++ mod entry point and SDK CMake target.
 - [x] Reads per-weapon XP settings and reloads progression when the active game save changes.
