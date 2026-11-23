@@ -15,15 +15,14 @@ This is the separate RAC1 edition. The existing `ng-plus-plus/` directory remain
 - [x] RAC1-only manifest and launcher settings.
 - [x] Independent per-weapon progression state (14 weapon slots, levels 1–10).
 - [x] Versioned save-payload serialization for OpenRAC's per-save mod data API.
-- [x] Per-weapon XP requirements and linear/increasing requirement calculation.
+- [x] Native C++ mod entry point and SDK CMake target.
+- [x] Reads per-weapon XP settings and reloads progression when the active game save changes.
 - [ ] Verified RAC1 item-ID mapping.
 - [ ] Reliable weapon-to-kill attribution in RAC1.
-- [ ] Connect progression state to OpenRAC save callbacks.
+- [ ] Award XP only after a confirmed kill and persist the updated progression.
 - [ ] Damage/ammo effects and level-up notices.
-- [ ] Native plugin entry point, packaging and in-game testing on NTSC and PAL.
+- [ ] Build/package for each platform and in-game testing on NTSC and PAL.
 
-The progression core is deliberately separate from game hooks. A kill award must not be called until RAC1 has positively identified the weapon responsible for that kill. This avoids giving XP to the wrong weapon. The XP defaults in the manifest (100) are provisional until enemy XP values and kill attribution are tested.
+The native plugin currently loads its progression core and keeps save data separate per game save. It does **not** award XP yet: kill credit must first be positively attributed to the weapon that caused the kill. The plugin is therefore an early development build, not a finished playable NG++ experience.
 
-## Build note
-
-The current CMake target builds the standalone progression core only. It is not yet an installable OpenRAC mod and must not be enabled as one.
+The XP defaults in the manifest (100) are provisional until enemy XP values and kill attribution are tested.
