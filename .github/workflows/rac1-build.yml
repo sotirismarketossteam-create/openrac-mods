@@ -59,6 +59,25 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
+          # Bundle the MinGW runtime DLLs beside the plugin. OpenRAC loads
+          # the plugin with LoadLibrary, which must also resolve these imports.
+          $compilerLine = cmake -LA -N build | Select-String '^CMAKE_CXX_COMPILER:FILEPATH='
+          if (-not $compilerLine) { throw 'Could not locate the configured C++ compiler' }
+          $compiler = $compilerLine.ToString().Split('=', 2)[1]
+          $runtimeDir = Split-Path $compiler
+          $plugin = Get-ChildItem build/package -Recurse -Filter ng_plus_plus_rac1.dll | Select-Object -First 1
+          if (-not $plugin) { throw 'Built RAC1 plugin DLL was not found' }
+          foreach ($name in @('libstdc++-6.dll', 'libgcc_s_seh-1.dll', 'libwinpthread-1.dll')) {
+            $runtime = Join-Path $runtimeDir $name
+            if (-not (Test-Path $runtime)) {
+              $runtime = (& $compiler "-print-file-name=$name").Trim()
+            }
+            if (Test-Path $runtime) {
+              Copy-Item $runtime -Destination $plugin.DirectoryName -Force
+            } else {
+              Write-Host "Runtime dependency not present in toolchain: $name"
+            }
+          }
           Get-ChildItem build/package -Directory | ForEach-Object {
             python ".sdk/openrac-mod-sdk-1.36.0/tools/package_mod.py" $_.FullName -o dist
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
