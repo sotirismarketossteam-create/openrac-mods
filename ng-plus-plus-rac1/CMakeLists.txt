@@ -23,6 +23,12 @@ openrac_add_mod(ng_plus_plus_rac1
         src/progression.cpp
 )
 
+# OpenRAC loads the plugin directly from its mod directory. Statically link
+# the MinGW C/C++ runtimes so Windows users do not need separate runtime DLLs.
+if(MINGW)
+    target_link_options(ng_plus_plus_rac1 PRIVATE -static -static-libgcc -static-libstdc++)
+endif()
+
 include(CTest)
 if(BUILD_TESTING)
     add_executable(ng_plus_plus_rac1_progression_test tests/progression_test.cpp)
