@@ -10,6 +10,28 @@ This is the separate RAC1 edition. The existing `ng-plus-plus/` directory remain
 - Each weapon has its own setting for the XP needed to reach its next level.
 - Launcher settings expose the level cap, linear/increasing XP curve, level-up notices, damage scaling and ammo-capacity scaling.
 
+## RAC1 weapon item IDs
+
+The progression slots cover all 15 weapons in the OpenRAC RAC1 catalogue:
+
+| Weapon | RAC1 item ID |
+|---|---:|
+| Bomb Glove | `0x0A` |
+| Devastator | `0x0B` |
+| Blaster | `0x0F` |
+| Pyrocitor | `0x10` |
+| Mine Glove | `0x11` |
+| Walloper | `0x12` |
+| Tesla Claw | `0x13` |
+| Visibomb Gun | `0x0D` |
+| Glove of Doom | `0x14` |
+| Morph-o-Ray | `0x15` |
+| R.Y.N.O. | `0x17` |
+| Suck Cannon | `0x09` |
+| Decoy Glove | `0x19` |
+| Taunter | `0x0E` |
+| Drone Device | `0x18` |
+
 ## Implementation status
 
 - [x] RAC1-only manifest and launcher settings.
