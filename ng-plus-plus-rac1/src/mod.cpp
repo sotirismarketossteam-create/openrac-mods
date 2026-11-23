@@ -86,7 +86,7 @@ std::int32_t read_equipped_item(openrac::Mod& mod) {
     // RAC1's Hero_UpdateEquippedItems hook runs after the game updates the held item.
     // Relocate the executable's hero record for both NTSC-U and PAL before reading it.
     constexpr std::uint32_t hero_record = 0x0013F450u;
-    constexpr std::uint32_t hero_item_id_offset = 0x2080u + 0x10B8u;
+    constexpr std::uint32_t hero_item_id_offset = 0x10B8u;
     const auto base = mod.relocate(hero_record);
     if (base == 0) return -1;
     return mod.memory().read<std::int32_t>(base + hero_item_id_offset);
@@ -169,8 +169,8 @@ void load(openrac::Mod& mod) {
         Weapon weapon{};
         if (!settings.enabled || !weapon_from_item(hit.item, weapon)) return;
 
-        // Award one kill's XP to only the weapon associated with the fatal hit.
-        // XP per kill is intentionally a launcher setting rather than a hard-coded value.
+        // Award only after a player weapon has been identified for the hit.
+        // The default kill reward is configurable in the launcher.
         const auto xp = static_cast<std::uint32_t>(mod.setting<int>("xp_per_kill"));
         const bool leveled = progression.award_kill(weapon, xp, settings);
         save_progress(mod);
