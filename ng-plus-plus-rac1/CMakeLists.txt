@@ -8,6 +8,10 @@ if(NOT OpenRACMod_DIR AND DEFINED OPENRAC_SDK)
 endif()
 find_package(OpenRACMod 1.16 REQUIRED)
 
+add_library(ngpp_rac1_progression STATIC src/progression.cpp)
+target_compile_features(ngpp_rac1_progression PUBLIC cxx_std_17)
+target_include_directories(ngpp_rac1_progression PUBLIC src)
+
 openrac_add_mod(ng_plus_plus_rac1
     MANIFEST openrac-mod.json
     SOURCES
@@ -18,6 +22,6 @@ openrac_add_mod(ng_plus_plus_rac1
 include(CTest)
 if(BUILD_TESTING)
     add_executable(ng_plus_plus_rac1_progression_test tests/progression_test.cpp)
-    target_link_libraries(ng_plus_plus_rac1_progression_test PRIVATE ng_plus_plus_rac1)
+    target_link_libraries(ng_plus_plus_rac1_progression_test PRIVATE ngpp_rac1_progression)
     add_test(NAME rac1_progression COMMAND ng_plus_plus_rac1_progression_test)
 endif()
