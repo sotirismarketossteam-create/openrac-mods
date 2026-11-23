@@ -7,11 +7,11 @@
 
 namespace ngpp::rac1 {
 
-constexpr std::size_t weapon_count = 14;
+constexpr std::size_t weapon_count = 15;
 
 enum class Weapon : std::uint8_t {
     BombGlove, Devastator, Blaster, Pyrocitor, MineGlove, Walloper,
-    TeslaClaw, VisibombGun, MorphORay, Ryno, SuckCannon, DecoyGlove,
+    TeslaClaw, GloveOfDoom, MorphORay, Ryno, SuckCannon, DecoyGlove,
     Taunter, DroneDevice
 };
 
