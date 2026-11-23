@@ -4,7 +4,7 @@
   "name": "NG++ (Ratchet & Clank)",
   "version": "0.1.0",
   "author": "Keros",
-  "description": "RAC1 edition: independent weapon experience and levels 1–10. Native progression core; kill-credit integration in development.",
+  "description": "RAC1 edition: independent weapon experience and levels 1–10, with per-save progression.",
   "license": "GPL-3.0-or-later",
   "homepage": "https://github.com/sotirismarketossteam-create/openrac-mods/tree/ng-plus-plus-rac1",
   "api": "1.34",
@@ -50,6 +50,16 @@
         }
       ],
       "description": "How each weapon's XP requirement grows at higher levels.",
+      "section": "Progression"
+    },
+    {
+      "key": "xp_per_kill",
+      "name": "XP per kill",
+      "type": "int",
+      "default": 10,
+      "min": 1,
+      "max": 1000,
+      "description": "Base weapon experience awarded for a confirmed kill credited to that weapon.",
       "section": "Progression"
     },
     {
