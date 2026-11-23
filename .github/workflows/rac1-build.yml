@@ -50,11 +50,11 @@ jobs:
       - name: Package (Linux)
         if: runner.os == 'Linux'
         shell: bash
-        run: python "$SDK/tools/package_mod.py" build/package/* -o dist
+        run: python ".sdk/openrac-mod-sdk-1.36.0/tools/package_mod.py" build/package/* -o dist
       - name: Package (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
-        run: python "$env:SDK/tools/package_mod.py" build/package/* -o dist
+        run: python ".sdk/openrac-mod-sdk-1.36.0/tools/package_mod.py" build/package/* -o dist
       - uses: actions/upload-artifact@v4
         with:
           name: ng-plus-plus-rac1-${{ matrix.platform }}
