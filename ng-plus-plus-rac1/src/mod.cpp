@@ -148,8 +148,16 @@ void load(openrac::Mod& mod) {
             const auto attacker = mod.memory().read<std::uint32_t>(record + 0x20u);
             const auto damage = mod.memory().read<float>(record + 0x2Cu);
             const auto slot = mod.moby_slot_of(moby);
-            if (slot >= 0 && equipped_item >= 0 && damage > 0.0f) {
-                pending_hits[slot] = PendingHit{equipped_item, attacker, damage};
+            Weapon hit_weapon{};
+            if (equipped_item >= 0 && weapon_from_item(equipped_item, hit_weapon)) {
+                if (mod.setting<bool>("damage_scaling")) {
+                    const auto level = progression.get(hit_weapon).level;
+                    const float multiplier = 1.0f + 0.10f * static_cast<float>(level - 1);
+                    mod.memory().write<float>(record + 0x2Cu, damage * multiplier);
+                }
+                if (slot >= 0 && damage > 0.0f) {
+                    pending_hits[slot] = PendingHit{equipped_item, attacker, damage};
+                }
             }
         }
         return record;
@@ -176,8 +184,10 @@ void load(openrac::Mod& mod) {
         save_progress(mod);
         if (leveled && mod.setting<bool>("level_notices")) {
             const auto i = weapon_index(weapon);
-            mod.info(std::string(weapon_names[i]) + " reached level "
-                     + std::to_string(progression.get(weapon).level) + "!");
+            const auto notice = std::string(weapon_names[i]) + " reached level "
+                              + std::to_string(progression.get(weapon).level) + "!";
+            mod.play_notice(notice);
+            mod.info(notice);
         }
     });
 
