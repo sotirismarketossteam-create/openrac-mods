@@ -9,10 +9,16 @@ namespace ngpp::rac1 {
 
 constexpr std::size_t weapon_count = 15;
 
+// RAC1 item IDs from OpenRAC's RAC1 weapon catalogue. This order matches Weapon.
+constexpr std::array<std::uint8_t, weapon_count> weapon_item_ids{{
+    0x0A, 0x0B, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x0D,
+    0x14, 0x15, 0x17, 0x09, 0x19, 0x0E, 0x18
+}};
+
 enum class Weapon : std::uint8_t {
     BombGlove, Devastator, Blaster, Pyrocitor, MineGlove, Walloper,
-    TeslaClaw, GloveOfDoom, MorphORay, Ryno, SuckCannon, DecoyGlove,
-    Taunter, DroneDevice
+    TeslaClaw, VisibombGun, GloveOfDoom, MorphORay, Ryno, SuckCannon,
+    DecoyGlove, Taunter, DroneDevice
 };
 
 struct WeaponProgress {
