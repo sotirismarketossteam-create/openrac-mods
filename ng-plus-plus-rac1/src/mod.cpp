@@ -65,6 +65,47 @@ std::size_t weapon_index(Weapon weapon) {
     return static_cast<std::size_t>(weapon);
 }
 
+// Draw the selected weapon's progress immediately beneath RAC1's upper-right ammo panel.
+// OpenRAC overlays use the game's 512 x 448 coordinate space.
+void draw_xp_hud(void*, const openrac_overlay* overlay) {
+    if (overlay == nullptr || overlay->rect == nullptr || overlay->text == nullptr
+        || active_mod == nullptr || !active_mod->setting<bool>("xp_hud")
+        || !settings.enabled || equipped_item < 0) {
+        return;
+    }
+
+    Weapon weapon{};
+    if (!weapon_from_item(equipped_item, weapon)) return;
+
+    const auto& state = progression.get(weapon);
+    const auto cap = static_cast<std::uint8_t>(active_mod->setting<int>("level_cap"));
+    const auto required = Progression::requirement(weapon, state.level, settings);
+    const float ratio = state.level >= cap || required == 0
+        ? 1.0f
+        : static_cast<float>(state.xp) / static_cast<float>(required);
+
+    // The weapon ammo readout is in the top-right HUD. This compact panel sits just below it.
+    constexpr float x = 382.0f;
+    constexpr float y = 91.0f;
+    constexpr float width = 116.0f;
+    constexpr float height = 22.0f;
+    overlay->rect(overlay->context, x, y, width, height, 0x080D18C8u);
+    overlay->text(overlay->context, x + 4.0f, y + 2.0f, 9.0f, 0xFFFFFFFFu,
+                  (std::string("LV ") + std::to_string(state.level)
+                   + (state.level >= cap ? "  MAX" : "  "
+                      + std::to_string(state.xp) + "/" + std::to_string(required) + " XP")).c_str());
+
+    constexpr float bar_x = x + 4.0f;
+    constexpr float bar_y = y + 14.0f;
+    constexpr float bar_width = width - 8.0f;
+    constexpr float bar_height = 5.0f;
+    overlay->rect(overlay->context, bar_x, bar_y, bar_width, bar_height, 0x394354FFu);
+    const float fill = bar_width * std::clamp(ratio, 0.0f, 1.0f);
+    if (fill > 0.0f) {
+        overlay->rect(overlay->context, bar_x, bar_y, fill, bar_height, 0x43E08AFFu);
+    }
+}
+
 void read_settings(openrac::Mod& mod) {
     settings.enabled = mod.setting<bool>("weapon_xp");
     settings.level_cap = static_cast<std::uint8_t>(mod.setting<int>("level_cap"));
@@ -120,6 +161,10 @@ void load(openrac::Mod& mod) {
         }
     });
     mod.on_settings([&mod] { read_settings(mod); });
+
+    if (!mod.on_overlay_phases(&draw_xp_hud, nullptr, OPENRAC_OVERLAY_PLAYING)) {
+        mod.warn("Could not register the weapon XP HUD overlay.");
+    }
 
     // Keep the currently held item in sync, including changes made through quick-select.
     mod.hook<openrac::rac1::Hero_UpdateEquippedItems>([&mod](auto original) {
