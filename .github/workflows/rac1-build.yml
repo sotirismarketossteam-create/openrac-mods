@@ -42,7 +42,7 @@ jobs:
       - name: Fetch OpenRAC SDK
         run: echo "SDK=$(python tools/fetch_sdk.py)" >> "$GITHUB_ENV"
       - name: Configure
-        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+        run: OPENRAC_SDK="$SDK" cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
       - name: Build
         run: cmake --build build --parallel
       - name: Test progression
