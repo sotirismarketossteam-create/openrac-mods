@@ -1,0 +1,226 @@
+{
+  "format": 2,
+  "id": "ng-plus-plus-rac1",
+  "name": "NG++ (Ratchet & Clank)",
+  "version": "0.1.0",
+  "author": "Keros",
+  "description": "RAC1 edition: independent weapon experience and levels 1–10. Configuration prototype; gameplay port in progress.",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/sotirismarketossteam-create/openrac-mods/tree/ng-plus-plus-rac1",
+  "api": "1.34",
+  "multiplayer": "gameplay",
+  "games": {
+    "rac1": [
+      "ntsc",
+      "pal"
+    ]
+  },
+  "hooks": [
+    "rac1.moby.record_death",
+    "rac1.combat.get_hit",
+    "rac1.item.give",
+    "rac1.level.load_gameplay"
+  ],
+  "settings": [
+    {
+      "key": "weapon_xp",
+      "name": "Weapon XP",
+      "type": "bool",
+      "default": true,
+      "description": "Weapons gain experience from enemies they kill.",
+      "section": "Progression"
+    },
+    {
+      "key": "level_cap",
+      "name": "Weapon level cap",
+      "type": "int",
+      "default": 10,
+      "min": 1,
+      "max": 10,
+      "description": "Highest level a weapon can reach.",
+      "section": "Progression"
+    },
+    {
+      "key": "xp_linear",
+      "name": "XP curve",
+      "type": "choice",
+      "default": "increasing",
+      "choices": [
+        {
+          "value": "linear",
+          "name": "Linear"
+        },
+        {
+          "value": "increasing",
+          "name": "Increasing"
+        }
+      ],
+      "description": "How each weapon's XP requirement grows at higher levels.",
+      "section": "Progression"
+    },
+    {
+      "key": "level_notices",
+      "name": "Level-up notifications",
+      "type": "bool",
+      "default": true,
+      "description": "Show a notice when a weapon levels up.",
+      "section": "Progression"
+    },
+    {
+      "key": "damage_scaling",
+      "name": "Weapon damage scaling",
+      "type": "bool",
+      "default": true,
+      "description": "Increase weapon damage with its level.",
+      "section": "Effects"
+    },
+    {
+      "key": "ammo_scaling",
+      "name": "Ammo capacity scaling",
+      "type": "bool",
+      "default": true,
+      "description": "Increase maximum ammo with weapon level where supported.",
+      "section": "Effects"
+    },
+    {
+      "key": "xp_bomb_glove",
+      "name": "Bomb Glove XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Bomb Glove to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_devastator",
+      "name": "Devastator XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Devastator to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_blaster",
+      "name": "Blaster XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Blaster to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_pyrocitor",
+      "name": "Pyrocitor XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Pyrocitor to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_mine_glove",
+      "name": "Mine Glove XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Mine Glove to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_walloper",
+      "name": "Walloper XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Walloper to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_tesla_claw",
+      "name": "Tesla Claw XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Tesla Claw to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_visibomb",
+      "name": "Visibomb Gun XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Visibomb Gun to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_morph_o_ray",
+      "name": "Morph-o-Ray XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Morph-o-Ray to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_ryno",
+      "name": "R.Y.N.O. XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for R.Y.N.O. to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_suck_cannon",
+      "name": "Suck Cannon XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Suck Cannon to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_decoy_glove",
+      "name": "Decoy Glove XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Decoy Glove to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_taunter",
+      "name": "Taunter XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Taunter to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    },
+    {
+      "key": "xp_drone_device",
+      "name": "Drone Device XP per level",
+      "type": "int",
+      "default": 100,
+      "min": 1,
+      "max": 100000,
+      "description": "Experience needed for Drone Device to reach its next level. This value is independent of every other weapon.",
+      "section": "Per-weapon XP"
+    }
+  ]
+}
